@@ -4,6 +4,7 @@
 /* global ajaxify */
 /* global err */
 
+//tested multiple versions of the code -- explains the copy and pasting. 
 'use strict';
 
 define('admin/advanced/events', ['bootbox', 'alerts', 'autocomplete'], (bootbox, alerts, autocomplete) => {
