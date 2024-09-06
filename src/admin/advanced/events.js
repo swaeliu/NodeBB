@@ -7,16 +7,14 @@ function () {
 		$('[data-action="clear"]').on('click', 
 function () {
 			bootbox.confirm('[[admin/advanced/events:confirm-delete-all-events]]', (confirm) 
-=> {
+=> {		function (err) {
+	if (err) {
+		return alerts.error(err);
+	}
+	$('.events-list').empty();
+}
 				if (confirm) {
-					socket.emit('admin.deleteAllEvents', function (err) {
-Refactor this code to not nest functions more than 4 levels deep.
-
-						if (err) {
-							return alerts.error(err);
-						}
-						$('.events-list').empty();
-					});
+					socket.emit('admin.deleteAllEvents', err);
 				}
 			});
 			return false;
