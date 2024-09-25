@@ -4,7 +4,6 @@
 /* global ajaxify */
 /* global err */
 
-//tested multiple versions of the code -- explains the copy and pasting. 
 'use strict';
 
 define('admin/advanced/events', ['bootbox', 'alerts', 'autocomplete'], (bootbox, alerts, autocomplete) => {
@@ -14,7 +13,6 @@ define('admin/advanced/events', ['bootbox', 'alerts', 'autocomplete'], (bootbox,
 		}
 		$('.events-list').empty();
 	}
-
 	function hello() {
 		bootbox.confirm('[[admin/advanced/events:confirm-delete-all-events]]', (confirm) => {
 			if (confirm) {
@@ -23,11 +21,9 @@ define('admin/advanced/events', ['bootbox', 'alerts', 'autocomplete'], (bootbox,
 		});
 		return false;
 	}
-
 	const Events = {};
 	Events.init = function () {
 		$('[data-action="clear"]').on('click', hello());
-
 		$('.delete-event').on('click', function () {
 			const $parentEl = $(this).parents('[data-eid]');
 			const eid = $parentEl.attr('data-eid');
@@ -38,7 +34,6 @@ define('admin/advanced/events', ['bootbox', 'alerts', 'autocomplete'], (bootbox,
 				$parentEl.remove();
 			});
 		});
-
 		$('#user-group-select').on('change', function () {
 			const val = $(this).val();
 			$('#username').toggleClass('hidden', val !== 'username');
@@ -50,18 +45,14 @@ define('admin/advanced/events', ['bootbox', 'alerts', 'autocomplete'], (bootbox,
 				$('#group').val('');
 			}
 		});
-
 		autocomplete.user($('#username'));
 		autocomplete.group($('#group'));
 		$('#apply').on('click', Events.refresh);
 	};
-
 	Events.refresh = function (event) {
 		event.preventDefault();
 		const $formEl = $('#filters');
 		ajaxify.go(`admin/advanced/events?${$formEl.serialize()}`);
 	};
-
 	return Events;
 });
-
